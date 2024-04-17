@@ -1,6 +1,7 @@
 import React from 'react'
 import { useGetAttributes } from '../hooks/index.js'
 import { useDataQuery } from '@dhis2/app-runtime'
+import {AttributeCreateForm} from './AttributeCreateForm.js'
 import {
     Table,
     TableBody,
@@ -69,6 +70,8 @@ export const Attributes = () => {
                     </Table>
                 )
             }
+            <AttributeCreateForm /> 
         </div>
+        
     )
 }
