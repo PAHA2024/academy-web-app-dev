@@ -28,16 +28,26 @@ import { useAlert } from '@dhis2/app-runtime'
 const { Field, Form: RFForm } = ReactFinalForm
 
 export const Form = () => {
-    const { show } = useAlert((values) => {
-        return  values
-    },()=>{
-        return {
-            success:true
+    const { show } = useAlert(
+        (values) => {
+            return JSON.stringify(values, null, 2)
+        },
+        (values) => {
+            if (values.title === 'none') {
+                return {
+                    critical: true,
+                }
+            } else {
+                return {
+                    success: true,
+                }
+            }
         }
-    })
+    )
+
     const alertValues = (values) => {
-        const formValues = JSON.stringify(values,null,2)
-        show(formValues)
+        
+        show(values)
     }
     return (
         <div>
@@ -52,7 +62,10 @@ export const Form = () => {
                                 component={SingleSelectFieldFF}
                                 className={styles.title}
                                 initialValue="none"
-                                options={[{ label: 'None', value: 'none' }]}
+                                options={[
+                                    { label: 'None', value: 'none' },
+                                    { label: 'Stagiaire', value: 'stagiaire' },
+                                ]}
                                 //validate={hasValue}
                             />
                         </div>
@@ -124,7 +137,7 @@ export const Form = () => {
                                 primary
                                 title="Button"
                                 value="default"
-                                type='submit'
+                                type="submit"
                             >
                                 SUBMIT
                             </Button>
